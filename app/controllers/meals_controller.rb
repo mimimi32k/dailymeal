@@ -8,8 +8,7 @@ class MealsController < ApplicationController
   end
   
   def create
-    Meal.create(meal_params)
-   
+    Meal.create(name: meal_params[:name], image: meal_params[:image], text: meal_params[:text], user_id: current_user.id)
   end
   
   private
