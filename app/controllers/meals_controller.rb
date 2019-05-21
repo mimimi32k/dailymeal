@@ -1,5 +1,5 @@
 class MealsController < ApplicationController
-  
+  before_action :move_to_index, except: [:index, :show]
   def index
     @meals = Meal.includes(:user).page(params[:page]).per(5).order("created_at DESC")
   end
@@ -27,6 +27,10 @@ class MealsController < ApplicationController
     if meal.user_id == current_user.id
       meal.update(meal_params)
     end
+  end
+  
+  def show
+    @meal = Meal.find(params[:id])
   end
   
   private

@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   get   'users/:id'   =>  'users#show'    #Mypageへのルーティング　　　　　　　　
   delete  'meals/:id'  => 'meals#destroy'
   get   'meals/:id/edit'  => 'meals#edit'
-  patch   'meals/:id'  => 'meals#update'# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  patch   'meals/:id'  => 'meals#update' 
+  get 'meals/:id' => 'meals#show'       #ツイート詳細画面  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
