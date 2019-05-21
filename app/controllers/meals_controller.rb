@@ -18,6 +18,17 @@ class MealsController < ApplicationController
     end
   end
   
+  def edit
+    @meal = Meal.find(params[:id])
+  end
+  
+  def update
+    meal = Meal.find(params[:id])
+    if meal.user_id == current_user.id
+      meal.update(meal_params)
+    end
+  end
+  
   private
   def meal_params
     params.permit(:image, :text)
