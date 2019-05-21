@@ -1,19 +1,26 @@
 class MealsController < ApplicationController
   
   def index
-    @meals = Meal.all.order("created_at DESC").page(params[:page]).per(5)
+    @meals = Meal.includes(:user).page(params[:page]).per(5).order("created_at DESC")
   end
   
   def new
   end
   
   def create
-    Meal.create(name: meal_params[:name], image: meal_params[:image], text: meal_params[:text], user_id: current_user.id)
+    Meal.create(image: meal_params[:image], text: meal_params[:text], user_id: current_user.id)
+  end
+  
+  def destroy
+    meal = Meal.find(params[:id])
+    if meal.user_id == current_user.id
+      meal.destroy
+    end
   end
   
   private
   def meal_params
-    params.permit(:name, :image, :text)
+    params.permit(:image, :text)
   end
 
   def move_to_index
