@@ -31,6 +31,7 @@ class MealsController < ApplicationController
   
   def show
     @meal = Meal.find(params[:id])
+    @comments = @meal.comments.includes(:user)
   end
   
   private
